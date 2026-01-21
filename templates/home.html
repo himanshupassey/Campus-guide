@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="home-container">
+    <div class="hero-section">
+        <div class="hero-text">
+            <h1>Welcome to <span class="highlight">Campus Guide</span></h1>
+            <p>Your AI-powered assistant for all college inquiries. Get instant answers about courses, fees, and campus life.</p>
+            <a href="{{ url_for('chat') }}" class="cta-button">Start Chatting</a>
+        </div>
+        <div class="hero-image">
+            <img src="{{ url_for('static', filename='images/bot.png') }}" alt="AI Assistant">
+        </div>
+    </div>
+</div>
+
+<style>
+    .home-container {
+        padding: 50px 10%;
+        font-family: 'Segoe UI', sans-serif;
+    }
+    .hero-section {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 40px;
+        margin-top: 50px;
+    }
+    
+    /* LIGHT MODE (Default) */
+    .hero-text h1 {
+        font-size: 3.5rem;
+        margin-bottom: 20px;
+        color: #333; /* Dark gray for light mode */
+        transition: color 0.3s ease;
+    }
+    .hero-text p {
+        font-size: 1.2rem;
+        color: #666;
+        margin-bottom: 30px;
+        transition: color 0.3s ease;
+    }
+
+    /* DARK MODE SUPPORT */
+    /* This assumes your dark mode button adds a 'dark-mode' class to the body */
+    body.dark-mode .hero-text h1 {
+        color: #ffffff !important; /* Forces text to white in dark mode */
+    }
+    body.dark-mode .hero-text p {
+        color: #cccccc !important; /* Light gray for readability */
+    }
+
+    .highlight {
+        color: #00d2ff;
+        text-shadow: 0 0 10px rgba(0, 210, 255, 0.3);
+    }
+    
+    .cta-button {
+        display: inline-block;
+        padding: 15px 35px;
+        background: linear-gradient(135deg, #00d2ff, #3a7bd5);
+        color: white !important; /* Always white text on button */
+        text-decoration: none;
+        border-radius: 50px;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+    .cta-button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 20px rgba(0, 210, 255, 0.4);
+    }
+    .hero-image img {
+        width: 100%;
+        max-width: 450px;
+        filter: drop-shadow(0 0 20px rgba(0, 210, 255, 0.4));
+        animation: float 4s ease-in-out infinite; /* Added a subtle float effect */
+    }
+
+    /* Animation to make the bot look alive */
+    @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-15px); }
+        100% { transform: translateY(0px); }
+    }
+
+    /* Responsive fix for mobile */
+    @media (max-width: 768px) {
+        .hero-section {
+            flex-direction: column;
+            text-align: center;
+        }
+        .hero-text h1 { font-size: 2.5rem; }
+    }
+</style>
+{% endblock %}

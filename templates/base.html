@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Campus Guide</title>
+
+    <!-- CORRECT WAY TO LOAD CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<button id="theme-toggle">🌙 Dark Mode</button>
+<div class="sidebar">
+    <h2>Campus Guide</h2>
+    <a href="/">Home</a>
+    <a href="/chat">Ask to EduBot</a>
+    <a href="/unanswered">Support</a>
+    <a href="/about">About</a>
+    <a href="/feedback">Feedback</a>
+</div>
+
+<div class="content">
+    {% block content %}{% endblock %}
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const themeToggle = document.getElementById("theme-toggle");
+
+    if (!themeToggle) return;  // if button not found, stop
+
+    function applyTheme(theme) {
+        if (theme === "dark") {
+            document.body.classList.add("dark-mode");
+            themeToggle.innerText = "☀️ Light Mode";
+        } else {
+            document.body.classList.remove("dark-mode");
+            themeToggle.innerText = "🌙 Dark Mode";
+        }
+    }
+
+    // Load saved theme
+    const savedTheme = localStorage.getItem("theme");
+    applyTheme(savedTheme || "light");
+
+    // Toggle theme on click
+    themeToggle.addEventListener("click", function () {
+        const currentTheme = document.body.classList.contains("dark-mode") ? "dark" : "light";
+        const newTheme = currentTheme === "dark" ? "light" : "dark";
+
+        localStorage.setItem("theme", newTheme);
+        applyTheme(newTheme);
+    });
+});
+</script>
+
+
+</body>
+</html>

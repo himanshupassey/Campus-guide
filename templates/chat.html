@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 style="text-align: left;">ChatBot For College Enquiry</h1>
+
+<div class="chat-box" id="chat-box">
+    <div class="message bot">
+        Hi 👋 How can I help you?
+    </div>
+
+    <div id="typing-indicator" class="message bot typing hidden">
+        typing<span>.</span><span>.</span><span>.</span>
+    </div>
+</div>
+
+<div class="chat-input-wrapper">
+    <div id="bot-avatar" class="bot-avatar">🤖</div>
+    <div class="chat-input">
+        <input type="text" id="message" placeholder="Type your message...">
+        <button onclick="sendMessage()">➤</button>
+    </div>
+</div>
+
+<div id="bot-image" class="bot-image">
+    <img src="{{ url_for('static', filename='images/bot.png') }}" alt="ChatBot" id="bot-img">
+</div>
+
+<script>
+function sendMessage() {
+    let input = document.getElementById("message");
+    let message = input.value.trim();
+    if (message === "") return;
+
+    let box = document.getElementById("chat-box");
+    let typing = document.getElementById("typing-indicator");
+    let avatar = document.getElementById("bot-avatar");
+
+    // Add User message immediately
+    box.innerHTML += `<div class="message user">${message}</div>`;
+    box.scrollTop = box.scrollHeight;
+    input.value = "";
+
+    // Step 1: Show "typing..." and pop up the emoji
+    typing.classList.remove("hidden");
+    avatar.classList.add("active");
+    box.scrollTop = box.scrollHeight;
+
+    fetch("/get_response", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message })
+    })
+    .then(res => res.json())
+    .then(data => {
+        // Step 2: Artificial delay to make "typing..." visible
+        setTimeout(() => {
+            typing.classList.add("hidden");
+            avatar.classList.remove("active"); // Hide emoji after answering
+
+            box.innerHTML += `<div class="message bot">${data.reply.replace(/\n/g, '<br>')}</div>`;
+            box.scrollTop = box.scrollHeight;
+        }, 1200); // 1.2 second delay
+    })
+    .catch(() => {
+        typing.classList.add("hidden");
+        avatar.classList.remove("active");
+    });
+}
+
+// Handle Enter Key
+document.getElementById("message").addEventListener("keydown", e => {
+    if (e.key === "Enter") sendMessage();
+});
+</script>
+
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="support-container">
+    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }}">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <div class="support-header">
+        <div class="header-text">
+            <h1>Support Panel 🛠️</h1>
+            <p>Managing unanswered student queries</p>
+        </div>
+
+        <form action="/clear_logs" method="POST" class="admin-controls">
+            <div class="admin-input-group">
+                <label for="pass">Admin Access</label>
+                <input type="password" name="password" id="pass" placeholder="Password" required class="admin-input">
+            </div>
+            <button type="submit" class="btn-clear">🗑️ Clear History</button>
+        </form>
+    </div>
+
+    <div class="table-wrapper">
+        <table class="support-table">
+            <thead>
+                <tr>
+                    <th style="width: 30%;">Timestamp</th>
+                    <th>User Query</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if logs %}
+                    {% for log in logs %}
+                    <tr>
+                        <td class="timestamp">{{ log.time }}</td>
+                        <td class="query-text">{{ log.question }}</td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="2" class="empty-state">
+                            <h3>All clear! ✨</h3>
+                            <p>No unanswered questions recorded.</p>
+                        </td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
