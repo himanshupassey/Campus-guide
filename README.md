@@ -34,9 +34,16 @@ Check out the live application here: (https://campus-guide-5fet.onrender.com/)
 **1. Clone the repository:**
 ```bash
 git clone [https://github.com/himanshupassey/campus-guide.git](https://github.com/himanshupassey/campus-guide.git)
-
+```
+2. Install dependencies:
+```bash
 pip install -r requirements.txt
+```
+3. Run the application:
+```bash   
 python app.py
+```
+4. View in Browser:
 Open http://127.0.0.1:5000 in your browser.
 
 👨‍💻 Author
