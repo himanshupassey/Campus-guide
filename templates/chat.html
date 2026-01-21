@@ -23,7 +23,7 @@
 </div>
 
 <div id="bot-image" class="bot-image">
-    <img src="{{ url_for('static', filename='images/bot.png') }}" alt="ChatBot" id="bot-img">
+    <img src="{{ url_for('static', filename='Images/bot.png') }}" alt="ChatBot" id="bot-img">
 </div>
 
 <script>
@@ -73,5 +73,6 @@ document.getElementById("message").addEventListener("keydown", e => {
     if (e.key === "Enter") sendMessage();
 });
 </script>
+
 
 {% endblock %}
