@@ -46,7 +46,7 @@ python app.py
 **4. View in Browser:**
 Open http://127.0.0.1:5000 in your browser.
 
-👨‍💻 Author
+**👨‍💻 Author**
 *Developed by Himanshu Passey*
 
 Empowering academic choices through AI.
