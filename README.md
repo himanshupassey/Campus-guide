@@ -29,18 +29,13 @@ Check out the live application here: (https://campus-guide-5fet.onrender.com/)
 └── templates/         # Jinja2 HTML templates
 ```
 
-⚙️ Local Setup
-Clone the repository:
+## ⚙️ Local Setup
 
-Bash
-git clone [https://github.com/himanshupassey/campus-guide.git](https://github.com/himasnhupassey/campus-guide.git)
-Install dependencies:
+**1. Clone the repository:**
+```bash
+git clone [https://github.com/himanshupassey/campus-guide.git](https://github.com/himanshupassey/campus-guide.git)
 
-Bash
 pip install -r requirements.txt
-Run the application:
-
-Bash
 python app.py
 Open http://127.0.0.1:5000 in your browser.
 
